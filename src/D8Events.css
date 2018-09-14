@@ -1,0 +1,89 @@
+.d8EventRow {
+  border: .05rem solid #d7d7d7;
+  margin-bottom: 1rem;
+  font-family: 'Roboto', sans-serif;
+}
+
+.d8EventDateContainer {
+  background-color: #2a2a2a;
+  width: 100%;
+  float: left;
+  padding-top: .5rem;
+  padding-bottom: .5rem;
+}
+
+.d8EventDateNumber {
+  color: #fff;
+  font-size: 1.7rem;
+  text-transform: uppercase;
+  text-align: center;
+  width: 40px;
+  float: left;
+  margin-right: 1rem;
+  margin-left: .7rem;
+}
+
+.d8DayOfWeekMonthContainer {
+  float: left;
+}
+
+.d8EventDayOfWeek {
+  color: #fff;
+  font-size: 1rem;
+  text-transform: uppercase;
+  width: 100%;
+  float: left;
+  text-align: left;
+  letter-spacing: .15rem;
+}
+
+.d8EventMonth {
+  color: #fff;
+  font-size: .8rem;
+  text-transform: uppercase;
+  width: 100%;
+  float: left;
+  text-align: left;
+}
+
+.d8EventImage {
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+}
+
+.d8EventDetailsContainer {
+  padding: 1rem;
+}
+
+.d8EventDetails {
+  color: #777777;
+  font-size: 1.2rem;
+}
+
+.d8EventTitle a {
+  color: #2a2a2a;
+  margin-bottom: 1rem;
+  font-size: 1.4rem;
+}
+
+.d8EventTitle a:hover {
+  color: #a30046;
+  border-bottom-color: #a30046;
+  text-decoration: none;
+  border-bottom: 1px dotted #a30046;
+}
+
+.d8EventTitle a:focus {
+  color: #2a2a2a;
+  border-bottom-color: transparent;
+}
+
+.d8EventTitle a:active {
+  color: #2a2a2a;
+  border-bottom-color: transparent;
+}
+
+.d8EventTitle a:visited {
+  color: #2a2a2a;
+  border-bottom-color: transparent;
+}
