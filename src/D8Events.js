@@ -24,7 +24,10 @@ class D8Events extends Component {
   render() {
     // console.log(this.state.ourData);
     var results = this.state.ourData.map(thisNode => ({ nid: thisNode.node.nid, title: thisNode.node.title, image_url: thisNode.node.image_url, start_date: thisNode.node.start_date, campus: thisNode.node.campus, interests: thisNode.node.interests, very_start_date: thisNode.node.very_start_date, very_end_date: thisNode.node.very_end_date, alias: thisNode.node.alias }));
+    console.log(results);
     console.log(results[0]);
+    console.log(results[1]);
+    console.log(results[2]);
 
     // need 2018-07-07T19%3A30
     // have 2018-07-07
