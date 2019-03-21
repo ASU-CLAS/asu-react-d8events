@@ -26,10 +26,10 @@ class D8Events extends Component {
   }
 
   validDate(dateData, dateFormat) {
-    let returnDate = moment(dateData).format(dateFormat);
+    let returnDate = moment.utc(dateData).format(dateFormat);
     if(returnDate === "Invalid date") {
       dateData = dateData.split(':');
-      returnDate = moment(dateData[0]).format(dateFormat);
+      returnDate = moment.utc(dateData[0]).format(dateFormat);
       console.log(dateData[1]);
       console.log(dateFormat);
       if(dateData[1] === "00Z" && dateFormat === 'h:mm') {
