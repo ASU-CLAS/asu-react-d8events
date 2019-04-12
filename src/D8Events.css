@@ -15,7 +15,6 @@
 .d8EventDateNumber {
   color: #fff;
   font-size: 1.7rem;
-  text-transform: uppercase;
   text-align: center;
   width: 40px;
   float: left;
@@ -30,20 +29,20 @@
 .d8EventDayOfWeek {
   color: #fff;
   font-size: 1rem;
-  text-transform: uppercase;
   width: 100%;
   float: left;
   text-align: left;
-  letter-spacing: .15rem;
+  letter-spacing: .1rem;
+  font-weight: bold;
 }
 
 .d8EventMonth {
   color: #fff;
   font-size: .8rem;
-  text-transform: uppercase;
   width: 100%;
   float: left;
   text-align: left;
+  line-height: .8em;
 }
 
 .d8EventImage {
@@ -86,4 +85,54 @@
 .d8EventTitle a:visited {
   color: #2a2a2a;
   border-bottom-color: transparent;
+}
+.d8EventDateContainer::after {
+  content: " ";
+  clear:both;
+  display:block;
+}
+.eventItemCard .d8EventDateContainer {
+  float:none;
+}
+.eventItemCard .d8EventDetailsContainer {
+  padding:.5rem;
+}
+.eventItemCard .d8EventImage {
+  padding:0;
+}
+.eventItemCard .d8EventImageTop a {
+  display:block;
+  height:100%;
+}
+.eventItemCard .d8EventImageTop img {
+  object-fit: cover;
+  min-height: 100%;
+  min-width:100%;
+}
+.eventItemCard .d8EventImageTop-wrapper {
+  position:relative;
+  height:0;
+  padding-top:56%;
+  overflow:hidden;
+}
+.eventItemCard .d8EventImageTop {
+  position:absolute;
+  top:0;
+  height:100%;
+}
+.eventItemCard .d8EventTitle a {
+    font-size: 1.253rem;
+}
+.eventItemCard .d8EventDetails {
+    font-size: 1rem;
+    margin-bottom:0;
+}
+.eventItemCard .d8EventTitle {
+  margin-bottom:.5rem;
+}
+.eventItemCard .card {
+  height:100%;
+}
+.eventItemCard {
+  margin-bottom:20px;
 }
