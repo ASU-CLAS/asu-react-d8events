@@ -24,7 +24,7 @@
 
 .d8EventImageContainer {
   padding: 0;
-  border-right: 5px solid #FFC627;
+  border-right: 7px solid #FFC627;
 }
 
 /*.d8EventYellowBorder {
@@ -43,6 +43,16 @@
 
 .d8StartAndEnd {
   padding-left: 30px;
+  font-size: 13px;
+}
+
+.d8StartAndEndEventCard {
+  padding-left: 24px;
+  font-size: 13px;
+}
+
+.d8StartAndEndEventCard span {
+  word-break: normal;
 }
 
 .d8EventDayOfWeek {
@@ -57,12 +67,13 @@
 
 @media only screen and (max-width: 600px) {
   .d8EventImageContainer {
-    border-bottom: 5px solid #FFC627;
+    border-bottom: 7px solid #FFC627;
     border-right: 0;
   }
 }
 
 .d8Location {
+  font-size: 13px;
   text-align: center;
   padding-right: 125px;
 }
@@ -93,7 +104,7 @@
 .d8EventTitle a {
   color: #2a2a2a;
   margin-bottom: 1rem;
-  font-size: 1.4rem;
+  font-size: 1.2rem;
 }
 
 .d8EventTitle a:hover {
@@ -140,6 +151,16 @@
   min-height: 100%;
   min-width:100%;
 }
+
+.d8EventImageTop-wrapper {
+  border-bottom: 7px solid #FFC627;
+}
+
+.d8LocationThreeCards {
+  padding: 0;
+  font-size: 12px;
+}
+
 .eventItemCard .d8EventImageTop-wrapper {
   position:relative;
   height:0;
@@ -152,7 +173,8 @@
   height:100%;
 }
 .eventItemCard .d8EventTitle a {
-    font-size: 1.253rem;
+    font-size: 1.1rem;
+    font-weight: bold;
 }
 .eventItemCard .d8EventDetails {
     font-size: 1rem;
@@ -160,6 +182,7 @@
 }
 .eventItemCard .d8EventTitle {
   margin-bottom:.5rem;
+  padding: .5rem;
 }
 .eventItemCard .card {
   height:100%;

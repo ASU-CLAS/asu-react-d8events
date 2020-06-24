@@ -77,19 +77,29 @@ class EventItemCard extends Component {
           </div>
         </div>
 
-        <div className="d8EventDateContainer">
+        {/*<div className="d8EventDateContainer">
           <span className="d8EventDateNumber">{validDate(this.props.listNode.very_start_date, 'D')}</span>
           <div className="d8DayOfWeekMonthContainer">
             <span className="d8EventDayOfWeek">{validDate(this.props.listNode.very_start_date, 'dddd')}</span>
             <span className="d8EventMonth">{validDate(this.props.listNode.very_start_date, 'MMMM')}</span>
           </div>
-        </div>
+    </div>*/}
 
         <div className="d8EventDetailsContainer">
             <p className="d8EventTitle">
               <a href={`${this.props.listNode.alias}/?eventDate=${validDate(this.props.listNode.very_start_date, 'YYYY-MM-DD')}`} target="_blank">{this.props.listNode.title}</a>
             </p>
-            <p className="d8EventDetails">{formatTime(validDate(this.props.listNode.very_start_date,'h:mm'), validDate(this.props.listNode.very_end_date,'h:mm'))} | {this.props.listNode.campus} | {this.props.listNode.interests.replace(/\|/g, ", ")}</p>
+            <div className="row">
+              <div className="col-6 col-sm-6 col-md-6 col-lg-6 col-xl-6 d8StartAndEndEventCard">
+                <span>{validDate(this.props.listNode.very_start_date, 'dddd')}, </span>
+                <span>{validDate(this.props.listNode.very_start_date, 'MMMM')}&nbsp;</span>
+                <span>{validDate(this.props.listNode.very_start_date, 'D')}</span>
+                <p>{formatTime(this.props.listNode.full_start_date, this.props.listNode.full_end_date)}</p>
+              </div>
+              <div className="col-6 col-sm-6 col-md-6 col-lg-6 col-xl-6">
+                <div className="d8LocationThreeCards">{this.props.listNode.campus}</div>
+              </div>
+            </div>
         </div>
 
         </div>
