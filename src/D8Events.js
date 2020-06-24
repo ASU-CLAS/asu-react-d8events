@@ -11,7 +11,7 @@ class EventItemDefault extends Component {
 
       <div className="row d8EventRow">
 
-        <div className="d8EventDateContainer">
+        {/*<div className="d8EventDateContainer">
 
           <span className="d8EventDateNumber">{validDate(this.props.listNode.very_start_date, 'D')}</span>
 
@@ -20,17 +20,18 @@ class EventItemDefault extends Component {
             <span className="d8EventMonth">{validDate(this.props.listNode.very_start_date, 'MMMM')}</span>
           </div>
 
-        </div>
+    </div>*/}
 
-        <div className="col-12 col-sm-12 col-md-3 col-lg-3 col-xl-3">
+        <div className="col-12 col-sm-3 col-md-3 col-lg-3 col-xl-3 d8EventImageContainer">
 
             {this.props.listNode.image_url !== "" && <a href={`${this.props.listNode.alias}/?eventDate=${validDate(this.props.listNode.very_start_date, 'YYYY-MM-DD')}`} target="_blank">
               <img src={this.props.listNode.image_url} alt={this.props.listNode.title} className="img-fluid d8EventImage" />
             </a>}
-
+            
+            
         </div>
 
-        <div className="col-12 col-sm-12 col-md-9 col-lg-9 col-xl-9 d8EventDetailsContainer">
+        <div className="col-12 col-sm-8 col-md-8 col-lg-8 col-xl-8 d8EventDetailsContainer">
 
             <p className="d8EventTitle">
               <a href={`${this.props.listNode.alias}/?eventDate=${validDate(this.props.listNode.very_start_date, 'YYYY-MM-DD')}`} target="_blank">{this.props.listNode.title}</a>
@@ -91,12 +92,16 @@ class D8Events extends Component {
 
   componentDidMount() {
 
-    // const feedURL = 'https://cors-anywhere.herokuapp.com/https://asuevents.asu.edu/feed-json/college-liberal-arts-and-sciences'
+    const feedURL = 'https://cors-anywhere.herokuapp.com/https://asuevents.asu.edu/feed-json/college-liberal-arts-and-sciences'
+    /*
+    returns empty endpoint
     const feedURL = this.props.dataFromPage.feed
+    */    
     const feedItems = this.props.dataFromPage.items
-    console.log(feedItems);
+    console.log(this.props.dataFromPage);
+    console.log(this.props.dataFromPage.feed)
     axios.get(feedURL).then(response => {
-          // console.log(response.data.nodes)
+          console.log(response.data.nodes[0])
           this.setState({
             displayData: response.data.nodes,
             displayStyle: feedItems,
@@ -106,11 +111,13 @@ class D8Events extends Component {
   }
 
   render() {
-    // console.log(this.state.displayData);
+    console.log(this.state.displayData);
     var results = this.state.displayData.map(thisNode => ({ nid: thisNode.node.nid, title: thisNode.node.title, image_url: thisNode.node.image_url, start_date: thisNode.node.start_date, campus: thisNode.node.campus, interests: thisNode.node.interests, very_start_date: thisNode.node.very_start_date, very_end_date: thisNode.node.very_end_date, alias: thisNode.node.alias }));
     console.log(results[0]);
     console.log(results[1]);
     console.log(results[2]);
+    
+    
 
     // need 2018-07-07T19%3A30
     // have 2018-07-07
