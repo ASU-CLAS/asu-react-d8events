@@ -23,6 +23,7 @@ export const formatTime = (startTime, endTime) => {
     return startTime;
   }
   else {
-    return startTime + " - " + endTime;
+    return startTime.slice(13) + " - " + endTime.slice(13);
   }
 }
+

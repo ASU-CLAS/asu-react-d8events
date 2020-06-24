@@ -7,6 +7,7 @@ import {validDate, formatTime} from './D8Utils'
 class EventItemDefault extends Component {
 
   render() {
+    console.log(this.props.listNode);
     return (
 
       <div className="row d8EventRow">
@@ -22,7 +23,7 @@ class EventItemDefault extends Component {
 
     </div>*/}
 
-        <div className="col-12 col-sm-3 col-md-3 col-lg-3 col-xl-3 d8EventImageContainer">
+        <div className="col-12 col-sm-3 col-md-5 col-lg-3 col-xl-3 d8EventImageContainer">
 
             {this.props.listNode.image_url !== "" && <a href={`${this.props.listNode.alias}/?eventDate=${validDate(this.props.listNode.very_start_date, 'YYYY-MM-DD')}`} target="_blank">
               <img src={this.props.listNode.image_url} alt={this.props.listNode.title} className="img-fluid d8EventImage" />
@@ -30,13 +31,27 @@ class EventItemDefault extends Component {
             
             
         </div>
+        {/*this.props.listNode.campus
+          <p>{formatTime(validDate(this.props.listNode.very_start_date,'h:mm'), validDate(this.props.listNode.very_end_date,'h:mm'))}</p>
+        */}
 
-        <div className="col-12 col-sm-8 col-md-8 col-lg-8 col-xl-8 d8EventDetailsContainer">
+        <div className="col-12 col-sm-9 col-md-7 col-lg-9 col-xl-9 d8EventDetailsContainer">
 
             <p className="d8EventTitle">
               <a href={`${this.props.listNode.alias}/?eventDate=${validDate(this.props.listNode.very_start_date, 'YYYY-MM-DD')}`} target="_blank">{this.props.listNode.title}</a>
             </p>
-            <p className="d8EventDetails">{formatTime(validDate(this.props.listNode.very_start_date,'h:mm'), validDate(this.props.listNode.very_end_date,'h:mm'))} | {this.props.listNode.campus} | {this.props.listNode.interests.replace(/\|/g, ", ")}</p>
+            <div className="row">
+              <div className="col-6 col-sm-6 col-md-6 col-lg-6 col-xl-6 d8StartAndEnd">
+                <span>{validDate(this.props.listNode.very_start_date, 'dddd')}, </span>
+                <span>{validDate(this.props.listNode.very_start_date, 'MMMM')}&nbsp;</span>
+                <span>{validDate(this.props.listNode.very_start_date, 'D')}</span>
+                <p>{formatTime(this.props.listNode.full_start_date, this.props.listNode.full_end_date)}</p>
+              </div>
+              <div className="col-6 col-sm-6 col-md-6 col-lg-6 col-xl-6">
+                <div className="d8Location">{this.props.listNode.campus}</div>
+              </div>
+            </div>
+            
 
         </div>
 
@@ -112,7 +127,7 @@ class D8Events extends Component {
 
   render() {
     console.log(this.state.displayData);
-    var results = this.state.displayData.map(thisNode => ({ nid: thisNode.node.nid, title: thisNode.node.title, image_url: thisNode.node.image_url, start_date: thisNode.node.start_date, campus: thisNode.node.campus, interests: thisNode.node.interests, very_start_date: thisNode.node.very_start_date, very_end_date: thisNode.node.very_end_date, alias: thisNode.node.alias }));
+    var results = this.state.displayData.map(thisNode => ({ nid: thisNode.node.nid, title: thisNode.node.title, image_url: thisNode.node.image_url, start_date: thisNode.node.start_date, campus: thisNode.node.campus, interests: thisNode.node.interests, very_start_date: thisNode.node.very_start_date, very_end_date: thisNode.node.very_end_date, alias: thisNode.node.alias, full_end_date: thisNode.node.end_date, full_start_date: thisNode.node.start_date}));
     console.log(results[0]);
     console.log(results[1]);
     console.log(results[2]);

@@ -41,6 +41,10 @@
   float: left;
 }
 
+.d8StartAndEnd {
+  padding-left: 30px;
+}
+
 .d8EventDayOfWeek {
   color: #fff;
   font-size: 1rem;
@@ -58,6 +62,11 @@
   }
 }
 
+.d8Location {
+  text-align: center;
+  padding-right: 125px;
+}
+
 .d8EventMonth {
   color: #fff;
   font-size: .8rem;
@@ -73,7 +82,7 @@
 }
 
 .d8EventDetailsContainer {
-  padding: 1rem;
+  padding: 3rem 1rem;
 }
 
 .d8EventDetails {
