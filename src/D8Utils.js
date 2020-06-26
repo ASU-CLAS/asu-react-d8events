@@ -18,6 +18,8 @@ export const validDate = (dateData, dateFormat) => {
   }
   return returnDate;
 }
+
+//adjusted for D8
 export const formatTime = (startTime, endTime) => {
   if(startTime === endTime) {
     return startTime;
