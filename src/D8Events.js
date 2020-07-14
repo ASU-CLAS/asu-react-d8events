@@ -68,7 +68,7 @@ class EventItemCard extends Component {
 
       <div className="col col-12 col-lg-4 eventItemCard">
 
-      <div class="card card-event">
+      <div className="card card-event">
         <div className="d8EventImageTop-wrapper">
           <div className="d8EventImageTop">
             {this.props.listNode.image_url !== "" && <a href={`${this.props.listNode.alias}/?eventDate=${validDate(this.props.listNode.very_start_date, 'YYYY-MM-DD')}`} target="_blank">
@@ -121,30 +121,87 @@ class D8Events extends Component {
 
   componentDidMount() {
 
+    // const feedURL = 'https://cors-anywhere.herokuapp.com/https://asuevents.asu.edu/feed-json/college-liberal-arts-and-sciences'
+    const feedData = this.props.dataFromPage.feed.split(",");
+    const feedURL = feedData[0];
+    const feedStyle = this.props.dataFromPage.items;
+    const feedTags = feedData.shift();
+    var feedTagsOr = [];
+    var feedTagsNot = [];
+    var feedTagsAnd = [];
+    for (var i = 0; i < feedData.length; i++) {
+      if (feedData[i].charAt(0) == "-") {
+        feedTagsNot.push(feedData[i].substring(1).toLowerCase());
+      }
+      else if (feedData[i].charAt(0) == "&") {
+        feedTagsAnd.push(feedData[i].substring(1).toLowerCase());
+      }
+      else if (feedData[i].charAt(0) == "+") {
+        feedTagsOr.push(feedData[i].substring(1).toLowerCase());
+      }
+    }
+    console.log(feedData);
 
-    const feedURL = this.props.dataFromPage.feed
-
-    const feedItems = this.props.dataFromPage.items
-    console.log(this.props.dataFromPage);
-    console.log(this.props.dataFromPage.feed)
     axios.get(feedURL).then(response => {
-          console.log(response.data.nodes[0])
+           console.log(response.data.nodes);
+          var tempDisplayData = response.data.nodes;
+          var finalDisplayData = [];
+          //console.log(tempDisplayData);
+
+          // Loop through feed nodes and flag them if certain tags are found
+          for (var i = 0; i < tempDisplayData.length; i++) {
+            tempDisplayData[i].flag = false;
+            // Flag NOT tags
+            console.log(feedTagsNot);
+            for (var j = 0; j < feedTagsNot.length; j++) {
+              //console.log(tempDisplayData[i].node.interests);
+              //console.log(feedTagsNot[j]);
+              if( tempDisplayData[i].node.interests.toLowerCase().includes(feedTagsNot[j]) ) {
+                tempDisplayData[i].flag = true;
+                //console.log("FLAGGING NODE");
+                //console.log(tempDisplayData[i]);
+              }
+              if( tempDisplayData[i].node.event_units.toLowerCase().includes(feedTagsNot[j]) ) {
+                tempDisplayData[i].flag = true;
+              }
+              if( tempDisplayData[i].node.audiences.toLowerCase().includes(feedTagsNot[j]) ) {
+                tempDisplayData[i].flag = true;
+              }
+            }
+
+            // Flag AND tags
+            console.log(feedTagsAnd);
+            for (var k = 0; k < feedTagsAnd.length; k++) {
+              if( tempDisplayData[i].node.interests.toLowerCase().includes(feedTagsAnd[k]) == false && tempDisplayData[i].node.event_units.toLowerCase().includes(feedTagsAnd[k]) == false && tempDisplayData[i].node.audiences.toLowerCase().includes(feedTagsAnd[k]) == false ) {
+                tempDisplayData[i].flag = true;
+              }
+            }
+
+            if(tempDisplayData[i].flag == false) {
+              finalDisplayData.push(tempDisplayData[i]);
+            }
+
+          }
+
+
           this.setState({
-            displayData: response.data.nodes,
-            displayStyle: feedItems,
+            displayData: finalDisplayData,
+            displayStyle: feedStyle,
+            displayNot: feedTagsNot,
           })
+
+          console.log(this.state);
+
     })
 
   }
 
   render() {
-    console.log(this.state.displayData);
-    var results = this.state.displayData.map(thisNode => ({ nid: thisNode.node.nid, title: thisNode.node.title, image_url: thisNode.node.image_url, start_date: thisNode.node.start_date, campus: thisNode.node.campus, interests: thisNode.node.interests, very_start_date: thisNode.node.very_start_date, very_end_date: thisNode.node.very_end_date, alias: thisNode.node.alias, full_end_date: thisNode.node.end_date, full_start_date: thisNode.node.start_date}));
+    // console.log(this.state.displayData);
+    var results = this.state.displayData.map(thisNode => ({ nid: thisNode.node.nid, title: thisNode.node.title, image_url: thisNode.node.image_url, start_date: thisNode.node.start_date, campus: thisNode.node.campus, interests: thisNode.node.interests, very_start_date: thisNode.node.very_start_date, very_end_date: thisNode.node.very_end_date, alias: thisNode.node.alias }));
     console.log(results[0]);
     console.log(results[1]);
     console.log(results[2]);
-
-
 
     // need 2018-07-07T19%3A30
     // have 2018-07-07
