@@ -28,8 +28,8 @@ class EventItemDefault extends Component {
             {this.props.listNode.image_url !== "" && <a href={`${this.props.listNode.alias}/?eventDate=${validDate(this.props.listNode.very_start_date, 'YYYY-MM-DD')}`} target="_blank">
               <img src={this.props.listNode.image_url} alt={this.props.listNode.title} className="img-fluid d8EventImage" />
             </a>}
-            
-            
+
+
         </div>
         {/*this.props.listNode.campus
           <p>{formatTime(validDate(this.props.listNode.very_start_date,'h:mm'), validDate(this.props.listNode.very_end_date,'h:mm'))}</p>
@@ -51,7 +51,7 @@ class EventItemDefault extends Component {
                 <div className="d8Location">{this.props.listNode.campus}</div>
               </div>
             </div>
-            
+
 
         </div>
 
@@ -66,13 +66,13 @@ class EventItemCard extends Component {
   render() {
     return (
 
-      <div className="col-12 col-sm-12 col-md-4 eventItemCard">
+      <div className="col col-12 col-lg-4 eventItemCard">
 
-      <div class="card">
+      <div class="card card-event">
         <div className="d8EventImageTop-wrapper">
           <div className="d8EventImageTop">
             {this.props.listNode.image_url !== "" && <a href={`${this.props.listNode.alias}/?eventDate=${validDate(this.props.listNode.very_start_date, 'YYYY-MM-DD')}`} target="_blank">
-              <img src={this.props.listNode.image_url} alt={this.props.listNode.title} className="img-fluid d8EventImage" />
+              <img src={this.props.listNode.image_url} alt={this.props.listNode.title} className="card-img-top img-fluid d8EventImage" />
             </a>}
           </div>
         </div>
@@ -92,10 +92,12 @@ class EventItemCard extends Component {
             <div className="row">
               <div className="col-6 col-sm-6 col-md-6 col-lg-6 col-xl-6 d8StartAndEndEventCard">
                 <i className="far fa-calendar"></i>
-                <span>{validDate(this.props.listNode.very_start_date, 'dddd')}, </span>
-                <span>{validDate(this.props.listNode.very_start_date, 'MMMM')}&nbsp;</span>
-                <span>{validDate(this.props.listNode.very_start_date, 'D')}</span>
-                <p>{formatTime(this.props.listNode.full_start_date, this.props.listNode.full_end_date)}</p>
+                <div>
+                  <span>{validDate(this.props.listNode.very_start_date, 'dddd')}, </span>
+                  <span>{validDate(this.props.listNode.very_start_date, 'MMMM')}&nbsp;</span>
+                  <span>{validDate(this.props.listNode.very_start_date, 'D')}</span>
+                  <div>{formatTime(this.props.listNode.full_start_date, this.props.listNode.full_end_date)}</div>
+                </div>
               </div>
               <div className="col-6 col-sm-6 col-md-6 col-lg-6 col-xl-6">
                 <i className="fas fa-map-marker-alt"></i>
@@ -119,11 +121,9 @@ class D8Events extends Component {
 
   componentDidMount() {
 
-    const feedURL = 'https://cors-anywhere.herokuapp.com/https://asuevents.asu.edu/feed-json/college-liberal-arts-and-sciences'
-    /*
-    returns empty endpoint
+
     const feedURL = this.props.dataFromPage.feed
-    */    
+
     const feedItems = this.props.dataFromPage.items
     console.log(this.props.dataFromPage);
     console.log(this.props.dataFromPage.feed)
@@ -143,8 +143,8 @@ class D8Events extends Component {
     console.log(results[0]);
     console.log(results[1]);
     console.log(results[2]);
-    
-    
+
+
 
     // need 2018-07-07T19%3A30
     // have 2018-07-07

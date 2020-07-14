@@ -26,9 +26,12 @@
   padding: 0;
   border-right: 7px solid #FFC627;
 }
-
+.d8EventImageContainer {
+  margin:0;
+  padding:0 !important;
+}
 /*.d8EventYellowBorder {
-  height: inherit; 
+  height: inherit;
   padding: 0;
   background-color: #FFC627;
 }*/
@@ -109,28 +112,24 @@
   font-weight: bold;
   margin-bottom: 1rem;
   font-size: 1.2rem;
+  text-decoration: none;
+  line-height: 1;
 }
 
 .d8EventTitle a:hover {
-  color: #a30046;
-  border-bottom-color: #a30046;
-  text-decoration: none;
-  border-bottom: 1px dotted #a30046;
+  text-decoration: underline;
 }
 
 .d8EventTitle a:focus {
   color: #2a2a2a;
-  border-bottom-color: transparent;
 }
 
 .d8EventTitle a:active {
   color: #2a2a2a;
-  border-bottom-color: transparent;
 }
 
 .d8EventTitle a:visited {
   color: #2a2a2a;
-  border-bottom-color: transparent;
 }
 .d8EventDateContainer::after {
   content: " ";
