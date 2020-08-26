@@ -113,6 +113,50 @@ class EventItemCard extends Component {
   }
 }
 
+class EventItemTwoCard extends Component {
+
+  render() {
+    return (
+
+      <div className="col col-12 col-lg-6 eventItemCard">
+
+      <div className="card card-event">
+        <div className="d8EventImageTop-wrapper">
+          <div className="d8EventImageTop">
+            {this.props.listNode.image_url !== "" && <a href={`${this.props.listNode.alias}/?eventDate=${validDate(this.props.listNode.very_start_date, 'YYYY-MM-DD')}`} target="_blank">
+              <img src={this.props.listNode.image_url} alt={this.props.listNode.title} className="card-img-top img-fluid d8EventImage" />
+            </a>}
+          </div>
+        </div>
+
+        <div className="d8EventDetailsContainer">
+            <p className="d8EventTitle">
+              <a href={`${this.props.listNode.alias}/?eventDate=${validDate(this.props.listNode.very_start_date, 'YYYY-MM-DD')}`} target="_blank">{this.props.listNode.title}</a>
+            </p>
+            <div className="row">
+              <div className="col-6 col-sm-6 col-md-6 col-lg-6 col-xl-6 d8StartAndEndEventCard">
+                <i className="far fa-calendar"></i>
+                <div>
+                  <span>{validDate(this.props.listNode.very_start_date, 'dddd')}, </span>
+                  <span>{validDate(this.props.listNode.very_start_date, 'MMMM')}&nbsp;</span>
+                  <span>{validDate(this.props.listNode.very_start_date, 'D')}</span>
+                  <div>{formatTime(this.props.listNode.full_start_date, this.props.listNode.full_end_date)}</div>
+                </div>
+              </div>
+              <div className="col-6 col-sm-6 col-md-6 col-lg-6 col-xl-6">
+                <i className="fas fa-map-marker-alt"></i>
+                <div className="d8LocationThreeCards">{this.props.listNode.campus}</div>
+              </div>
+            </div>
+        </div>
+
+        </div>
+      </div>
+
+    );
+  }
+}
+
 class D8Events extends Component {
 
   state = {
@@ -231,6 +275,22 @@ class D8Events extends Component {
               return(
                 <React.Fragment key={index}>
                   <EventItemCard listNode = {listNode} />
+                </React.Fragment>
+              )
+            })}
+          </div>
+          </div>
+        )
+      break;
+
+      case "TwoCards":
+        return (
+          <div className="container">
+          <div className="row">
+            {results.slice(0,4).map(( listNode, index ) => {
+              return(
+                <React.Fragment key={index}>
+                  <EventItemTwoCard listNode = {listNode} />
                 </React.Fragment>
               )
             })}
