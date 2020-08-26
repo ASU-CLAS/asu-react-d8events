@@ -164,6 +164,11 @@
   font-size: 12px;
 }
 
+.d8LocationTwoCards {
+  padding: 0;
+  font-size: 12px;
+}
+
 .eventItemCard .d8EventImageTop-wrapper {
   position:relative;
   height:0;

@@ -145,7 +145,7 @@ class EventItemTwoCard extends Component {
               </div>
               <div className="col-6 col-sm-6 col-md-6 col-lg-6 col-xl-6">
                 <i className="fas fa-map-marker-alt"></i>
-                <div className="d8LocationThreeCards">{this.props.listNode.campus}</div>
+                <div className="d8LocationTwoCards">{this.props.listNode.campus}</div>
               </div>
             </div>
         </div>
