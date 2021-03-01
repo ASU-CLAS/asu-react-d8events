@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import moment from 'moment';
+import Calendar from "./Calendar/Calendar"
 import './D8Events.css';
 import {validDate, formatTime} from './D8Utils'
 
@@ -222,6 +223,14 @@ class D8Events extends Component {
           </div>
         )
       break;
+
+      case "Calendar": 
+        return (
+  
+             <main>
+              <Calendar />
+            </main>
+      );
 
       case "ThreeCards":
         return (
