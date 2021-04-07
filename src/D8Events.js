@@ -120,6 +120,13 @@ class D8Events extends Component {
     displayData: []
   };
 
+  isMobile() {
+    if(window.innerWidth <= 414 && window.innerHeight <= 825){
+      return true;
+    }
+    return false
+  }
+
   componentDidMount() {
 
     // const feedURL = 'https://cors-anywhere.herokuapp.com/https://asuevents.asu.edu/feed-json/college-liberal-arts-and-sciences'
@@ -141,6 +148,11 @@ class D8Events extends Component {
         feedTagsOr.push(feedData[i].substring(1).toLowerCase());
       }
     }
+
+    
+
+
+
     console.log(feedData);
 
     axios.get(feedURL).then(response => {
@@ -200,9 +212,12 @@ class D8Events extends Component {
   render() {
     // console.log(this.state.displayData);
     var results = this.state.displayData.map(thisNode => ({ nid: thisNode.node.nid, title: thisNode.node.title, image_url: thisNode.node.image_url, start_date: thisNode.node.start_date, campus: thisNode.node.campus, interests: thisNode.node.interests, very_start_date: thisNode.node.very_start_date, very_end_date: thisNode.node.very_end_date, alias: thisNode.node.alias }));
-    console.log(results[0]);
-    console.log(results[1]);
-    console.log(results[2]);
+   // console.log(results[0]);
+    //console.log(results[1]);
+    //console.log(results[2]);
+
+
+    console.log(results, "beep boop beep");
 
     // need 2018-07-07T19%3A30
     // have 2018-07-07
@@ -228,7 +243,7 @@ class D8Events extends Component {
         return (
   
              <main>
-              <Calendar />
+              <Calendar isMobile={this.isMobile.bind(this)} results={results}/>
             </main>
       );
 
