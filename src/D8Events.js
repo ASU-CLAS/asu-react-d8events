@@ -165,7 +165,7 @@ class D8Events extends Component {
           for (var i = 0; i < tempDisplayData.length; i++) {
             tempDisplayData[i].flag = false;
             // Flag NOT tags
-            console.log(feedTagsNot);
+            
             for (var j = 0; j < feedTagsNot.length; j++) {
               //console.log(tempDisplayData[i].node.interests);
               //console.log(feedTagsNot[j]);
@@ -183,7 +183,7 @@ class D8Events extends Component {
             }
 
             // Flag AND tags
-            console.log(feedTagsAnd);
+            
             for (var k = 0; k < feedTagsAnd.length; k++) {
               if( tempDisplayData[i].node.interests.toLowerCase().includes(feedTagsAnd[k]) == false && tempDisplayData[i].node.event_units.toLowerCase().includes(feedTagsAnd[k]) == false && tempDisplayData[i].node.audiences.toLowerCase().includes(feedTagsAnd[k]) == false ) {
                 tempDisplayData[i].flag = true;

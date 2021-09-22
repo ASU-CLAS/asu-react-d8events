@@ -1,4 +1,5 @@
 import React from "react";
+import Modal from "./Modal"
 import {format, startOfWeek, endOfWeek, addDays, startOfMonth, endOfMonth, isSameMonth, isSameDay, parse, addMonths, parseISO, subMonths} from "date-fns";
 
 class Calendar extends React.PureComponent {
@@ -10,7 +11,8 @@ class Calendar extends React.PureComponent {
     state = {
       currentMonth: new Date(),
       selectedDate: undefined,
-      selectedEvents: []
+      selectedEvents: [],
+      showModal: false
     };
 
     /*isMobile() {
@@ -113,8 +115,10 @@ class Calendar extends React.PureComponent {
               
             </div>
           );
-          while (isSameDay(day, eventTimes[0])) {
-            eventTimes.shift();
+
+          
+          if (isSameDay(day, eventDays[0])) {
+            eventDays.shift();
             console.log("shift testing");
           }
           day = addDays(day, 1);
@@ -138,7 +142,7 @@ class Calendar extends React.PureComponent {
 
       this.setState({
         selectedDate: day
-      });
+      })
      
       console.log(this.state.selectedDate)
 
@@ -147,16 +151,22 @@ class Calendar extends React.PureComponent {
           if (isSameDay(this.state.selectedDate, parseISO(eventResults[i].very_end_date))){
             eventArray.push(eventResults[i])
           }
-      }
+      } 
 
-      console.log(eventArray);
+      this.setState({
+        selectedEvents: eventArray
+      })
+
+      console.log(eventArray); 
      
 
 
     };
 
     showModal = () => {
-      this.setState
+      this.setState({
+        showModal: true
+      })
     }
   
     nextMonth = () => {
@@ -196,11 +206,17 @@ class Calendar extends React.PureComponent {
   
     render() {
       return (
-        <div className="calendar">
-          {this.renderHeader()}
-          {this.renderDays()}
-          {this.renderCells()}
-          {this.renderFooter()}
+        <div>
+          <div>
+             <Modal show={this.state.showModal} events={this.state.selectedEvents}/>
+          </div>
+          
+           <div className="calendar">
+             {this.renderHeader()}
+             {this.renderDays()}
+             {this.renderCells()}
+             {this.renderFooter()}
+           </div>
         </div>
       );
     }
