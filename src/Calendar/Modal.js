@@ -8,18 +8,18 @@ class Modal extends React.Component {
 
       
         render() {
-            console.log(this.props.events)
+            console.log(this.props.events, "bean bean")
             if(!this.props.show){
                 return null;
             }
           return <div>
               
-              This is an events modal {this.props.events[0]}
-              <div class="modal" id="modal">
+              This is an events modal 
+              <div className="modal" id="modal">
         <h2>Modal Window</h2>
-        <div class="content">{this.props.children}</div>
-        <div class="actions">
-          <button class="toggle-button" onClick={this.onClose}>
+        <div className="content">{this.props.children}</div>
+        <div className="actions">
+          <button className="toggle-button" onClick={this.onClose}>
             close
           </button>
         </div>

@@ -84,12 +84,12 @@ class Calendar extends React.PureComponent {
       
 
       let eventDays = this.props.results.map(events => parseISO(events.very_end_date));
-      let eventTimes = eventDays.map(time => parseISO(time)) 
+      let sameDayBoolean = (date, array) => array.some(d => isSameDay(date, d))
       
       console.log(eventDays)
       console.log(eventDays[0].getMonth("MMM")) 
 
-      //let shownEvents = eventDays.filter(day => day.includes(format(this.state.currentMonth, "MMM")))
+      //let shownEvents = eventDays.filter(day => day.includes(format(this.state.currentMonth, "MMM"))) isSameDay(day, eventDays[0])
       //console.log(shownEvents)
       //console.log(shownEvents[0])
 
@@ -105,7 +105,7 @@ class Calendar extends React.PureComponent {
               className={`col cell ${
                 !isSameMonth(day, monthStart)
                   ? "disabled"
-                  : isSameDay(day, eventDays[0]) ? "event-date"
+                  : sameDayBoolean(day, eventDays) ? "event-date"
                   : isSameDay(day, selectedDate) ? "selected" : ""
               }`}
               key={day}
