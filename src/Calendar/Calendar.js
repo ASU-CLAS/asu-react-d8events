@@ -7,6 +7,8 @@ class Calendar extends React.PureComponent {
   constructor() {
     super();
     this.renderCells = this.renderCells.bind(this);
+    this.onDateClick = this.onDateClick.bind(this);
+
   }
     state = {
       currentMonth: new Date(),
@@ -86,8 +88,8 @@ class Calendar extends React.PureComponent {
       let eventDays = this.props.results.map(events => parseISO(events.very_end_date));
       let sameDayBoolean = (date, array) => array.some(d => isSameDay(date, d))
       
-      console.log(eventDays)
-      console.log(eventDays[0].getMonth("MMM")) 
+     // console.log(eventDays)
+     // console.log(eventDays[0].getMonth("MMM")) 
 
       //let shownEvents = eventDays.filter(day => day.includes(format(this.state.currentMonth, "MMM"))) isSameDay(day, eventDays[0])
       //console.log(shownEvents)
@@ -109,7 +111,7 @@ class Calendar extends React.PureComponent {
                   : isSameDay(day, selectedDate) ? "selected" : ""
               }`}
               key={day}
-              onClick={ () => {this.onDateClick(cloneDay); this.showModal()}}
+              onClick={ () => {this.onDateClick(cloneDay)}}
             >
               <p className="number">{formattedDate}</p>
               
@@ -118,8 +120,8 @@ class Calendar extends React.PureComponent {
 
           
           if (isSameDay(day, eventDays[0])) {
-            eventDays.shift();
-            console.log("shift testing");
+           // eventDays.shift();
+           // console.log("shift testing");
           }
           day = addDays(day, 1);
         }
@@ -140,21 +142,27 @@ class Calendar extends React.PureComponent {
       let eventArray = [];
       let eventResults = this.props.results;
 
-      this.setState({
-        selectedDate: day
-      })
+      
+
      
       console.log(this.state.selectedDate)
 
       for (let i = 0; i < eventResults.length; i++){
 
-          if (isSameDay(this.state.selectedDate, parseISO(eventResults[i].very_end_date))){
+          if (isSameDay(day, parseISO(eventResults[i].very_end_date))){
             eventArray.push(eventResults[i])
           }
       } 
 
+      if (eventArray.length === 0){
+        
+        return;
+      }
+
       this.setState({
-        selectedEvents: eventArray
+        selectedEvents: eventArray,
+        showModal: true
+
       })
 
       console.log(eventArray); 
@@ -163,11 +171,7 @@ class Calendar extends React.PureComponent {
 
     };
 
-    showModal = () => {
-      this.setState({
-        showModal: true
-      })
-    }
+
   
     nextMonth = () => {
       this.setState({
@@ -208,7 +212,7 @@ class Calendar extends React.PureComponent {
       return (
         <div>
           <div>
-             <Modal show={this.state.showModal} events={this.state.selectedEvents}/>
+             {this.state.showModal ? <Modal show={this.state.showModal} events={this.state.selectedEvents}/> : ''}
           </div>
           
            <div className="calendar">
