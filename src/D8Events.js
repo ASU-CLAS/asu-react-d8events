@@ -69,7 +69,7 @@ class EventItemCard extends Component {
       <div className="col col-12 col-lg-4 eventItemCard">
 
       <div className="card card-event">
-        <div className="d8EventImageTop-wrapper">
+        <div className="d8EventImageTop-wrapper card-image-content">
           <div className="d8EventImageTop">
             {this.props.listNode.image_url !== "" && <a href={`${this.props.listNode.alias}/?eventDate=${validDate(this.props.listNode.very_start_date, 'YYYY-MM-DD')}`} target="_blank">
               <img src={this.props.listNode.image_url} alt={this.props.listNode.title} className="card-img-top img-fluid d8EventImage" />
