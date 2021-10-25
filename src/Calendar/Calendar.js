@@ -1,5 +1,6 @@
 import React from "react";
 import Modal from "./Modal"
+import ReactDOM from 'react-dom';
 import {format, startOfWeek, endOfWeek, addDays, startOfMonth, endOfMonth, isSameMonth, isSameDay, parse, addMonths, parseISO, subMonths} from "date-fns";
 
 class Calendar extends React.PureComponent {
@@ -8,6 +9,7 @@ class Calendar extends React.PureComponent {
     super();
     this.renderCells = this.renderCells.bind(this);
     this.onDateClick = this.onDateClick.bind(this);
+    this.onClose = this.onClose.bind(this);
 
   }
     state = {
@@ -44,6 +46,8 @@ class Calendar extends React.PureComponent {
 
       let dateFormat = "EEEE";
       const days = [];
+
+      //render days of the week
   
       let startDate = startOfWeek(this.state.currentMonth);
   
@@ -80,22 +84,14 @@ class Calendar extends React.PureComponent {
   
       let days = [];
       let day = startDate;
-      let formattedDate = "";
+      let formattedDate = "";      
 
-      //Left off here, getting invalid time value error 
-      
+      //renders visual aids for days that contain events. sameDayBoolean iterates through the list of events and returns "true" for all events that match a certain day, and 
+      //returns the array of events that is passed to the modal
 
       let eventDays = this.props.results.map(events => parseISO(events.very_end_date));
       let sameDayBoolean = (date, array) => array.some(d => isSameDay(date, d))
-      
-     // console.log(eventDays)
-     // console.log(eventDays[0].getMonth("MMM")) 
-
-      //let shownEvents = eventDays.filter(day => day.includes(format(this.state.currentMonth, "MMM"))) isSameDay(day, eventDays[0])
-      //console.log(shownEvents)
-      //console.log(shownEvents[0])
-
-  
+        
       while (day <= endDate) {
    
         for (let i = 0; i < 7; i++) {
@@ -142,11 +138,7 @@ class Calendar extends React.PureComponent {
       let eventArray = [];
       let eventResults = this.props.results;
 
-      
-
-     
-      console.log(this.state.selectedDate)
-
+      // build array for all events with dates that match the selected date
       for (let i = 0; i < eventResults.length; i++){
 
           if (isSameDay(day, parseISO(eventResults[i].very_end_date))){
@@ -155,40 +147,38 @@ class Calendar extends React.PureComponent {
       } 
 
       if (eventArray.length === 0){
-        
+
         return;
+
+        } else {
+        // sets state to events list that matches the selected date, and renders modal component
+        this.setState({
+          selectedEvents: eventArray,
+          showModal: true
+  
+        })
+
       }
-
-      this.setState({
-        selectedEvents: eventArray,
-        showModal: true
-
-      })
-
-      console.log(eventArray); 
      
-
-
     };
 
+    onClose = e => {
+      this.setState({
+        showModal: !this.state.showModal
+      })
+      
+    };
 
-  
     nextMonth = () => {
       this.setState({
         currentMonth: addMonths(this.state.currentMonth, 1)
       });
-     // this.renderCells();
-      console.log("christine sucks")
-
-
     };
   
     prevMonth = () => {
       this.setState({
         currentMonth: subMonths(this.state.currentMonth, 1)
       });
-      //this.renderCells();
-      console.log("christine sucks")
     };
 
     renderFooter() {
@@ -209,16 +199,19 @@ class Calendar extends React.PureComponent {
     }
   
     render() {
+
+      console.log(this.state.showModal);
       return (
         <div>
-          <div>
-             {this.state.showModal ? <Modal show={this.state.showModal} events={this.state.selectedEvents}/> : ''}
-          </div>
+          
+         
           
            <div className="calendar">
+             <div id="modal">{this.state.showModal ? <Modal events={this.state.selectedEvents} close={this.onClose}/> : ''}</div>
              {this.renderHeader()}
              {this.renderDays()}
              {this.renderCells()}
+         
              {this.renderFooter()}
            </div>
         </div>

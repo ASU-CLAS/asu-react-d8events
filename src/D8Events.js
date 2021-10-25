@@ -156,7 +156,7 @@ class D8Events extends Component {
     console.log(feedData);
 
     axios.get(feedURL).then(response => {
-           console.log(response.data.nodes);
+           console.log(response.data.nodes, "full list of events from the feed");
           var tempDisplayData = response.data.nodes;
           var finalDisplayData = [];
           //console.log(tempDisplayData);
