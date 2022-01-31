@@ -162,20 +162,9 @@
 .d8LocationThreeCards {
   padding: 0;
   font-size: 12px;
+  margin-top: .5rem;
 }
 
-.eventItemCard .d8EventImageTop-wrapper {
-  position:relative;
-  height:0;
-  padding-top:56%;
-  overflow:hidden;
-}
-.eventItemCard .d8EventImageTop {
-  position:absolute;
-  top:0;
-  height:100%;
-  width: 100%;
-}
 .eventItemCard .d8EventTitle a {
     font-size: 1.1rem;
     font-weight: bold;
@@ -193,4 +182,19 @@
 }
 .eventItemCard {
   margin-bottom:20px;
+}
+
+.card:not(.card.card-foldable) > div:first-of-type:not(.card-image-content).d8EventImageTop-wrapper {
+  -webkit-box-flex: unset;
+  -ms-flex-positive: unset;
+  /* flex-grow: 1; */
+  flex-grow: unset;
+}
+
+.card-event .d8EventDetailsContainer .row {
+  padding: .5rem;
+}
+
+.d8StartAndEndEventCard svg.svg-inline-fa {
+  font-size: 1rem;
 }

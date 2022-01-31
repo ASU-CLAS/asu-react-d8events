@@ -69,7 +69,7 @@ class EventItemCard extends Component {
       <div className="col col-12 col-lg-4 eventItemCard">
 
       <div className="card card-event">
-        <div className="d8EventImageTop-wrapper card-image-content">
+        <div className="d8EventImageTop-wrapper">
           <div className="d8EventImageTop">
             {this.props.listNode.image_url !== "" && <a href={`${this.props.listNode.alias}/?eventDate=${validDate(this.props.listNode.very_start_date, 'YYYY-MM-DD')}`} target="_blank">
               <img src={this.props.listNode.image_url} alt={this.props.listNode.title} className="card-img-top img-fluid d8EventImage" />
@@ -90,18 +90,18 @@ class EventItemCard extends Component {
               <a href={`${this.props.listNode.alias}/?eventDate=${validDate(this.props.listNode.very_start_date, 'YYYY-MM-DD')}`} target="_blank">{this.props.listNode.title}</a>
             </p>
             <div className="row">
-              <div className="col-6 col-sm-6 col-md-6 col-lg-6 col-xl-6 d8StartAndEndEventCard">
-                <i className="far fa-calendar"></i>
+              <div className="d8StartAndEndEventCard">
                 <div>
+                  <i className="far fa-calendar"></i>&nbsp;&nbsp;
                   <span>{validDate(this.props.listNode.very_start_date, 'dddd')}, </span>
                   <span>{validDate(this.props.listNode.very_start_date, 'MMMM')}&nbsp;</span>
                   <span>{validDate(this.props.listNode.very_start_date, 'D')}</span>
                   <div>{formatTime(this.props.listNode.full_start_date, this.props.listNode.full_end_date)}</div>
                 </div>
-              </div>
-              <div className="col-6 col-sm-6 col-md-6 col-lg-6 col-xl-6">
-                <i className="fas fa-map-marker-alt"></i>
-                <div className="d8LocationThreeCards">{this.props.listNode.campus}</div>
+                <div className="d8LocationThreeCards">
+                  <i className="fas fa-map-marker-alt"></i>&nbsp;&nbsp;
+                  <span>{this.props.listNode.campus}</span>
+                </div>
               </div>
             </div>
         </div>
