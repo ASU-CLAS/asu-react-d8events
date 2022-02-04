@@ -85,14 +85,6 @@
   line-height: .8em;
 }
 
-.d8EventImage {
-  padding: 0;
-  margin: 0;
-  height: 100%;
-  width: 100%;
-  object-fit: cover;
-}
-
 .d8EventDetailsContainer {
   padding: 3rem 1rem;
 }
@@ -137,11 +129,9 @@
 .eventItemCard .d8EventDetailsContainer {
   padding:.5rem;
 }
-.eventItemCard .d8EventImage {
-  padding:0;
-}
-.eventItemCard .d8EventImageTop a {
-  display:block;
+
+.eventItemCard .d8EventImageTop-wrapper a {
+  display:flex;
   height:100%;
 }
 .eventItemCard .d8EventImageTop img {
@@ -172,17 +162,9 @@
   margin-bottom:.5rem;
   padding: .5rem;
 }
-.eventItemCard .card {
-  height:100%;
-}
+
 .eventItemCard {
   margin-bottom:20px;
-}
-
-.card:not(.card.card-foldable) > div:first-of-type:not(.card-image-content).d8EventImageTop-wrapper {
-  -webkit-box-flex: unset;
-  -ms-flex-positive: unset;
-  flex-grow: unset;
 }
 
 .card-event .d8EventDetailsContainer .row {
