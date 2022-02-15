@@ -30,7 +30,10 @@
   margin:0;
   padding:0 !important;
 }
-
+.d8EventRow .d8EventImageContainer a > .d8EventImage.img-fluid {
+  height: 100%;
+  object-fit: cover;
+}
 .d8EventYellowBorder .col-sm-1 .col-md-3{
   width: 3%;
 }
@@ -67,6 +70,9 @@
   .d8EventImageContainer {
     border-bottom: 7px solid #FFC627;
     border-right: 0;
+  }
+  .d8EventDetailsContainer .d8Location {
+    padding-right: unset;
   }
 }
 
@@ -173,4 +179,10 @@
 
 .d8StartAndEndEventCard svg.svg-inline-fa {
   font-size: 1rem;
+}
+/* ASU now events override WS2 defaults */
+.card:not(.card.card-foldable) > .d8EventImageTop-wrapper {
+  -webkit-box-flex: unset !important;
+  -ms-flex-positive: unset !important;
+  flex-grow: unset !important;
 }
