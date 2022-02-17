@@ -4,10 +4,13 @@ import moment from 'moment';
 import './D8Events.css';
 import {validDate, formatTime} from './D8Utils'
 
+
+let newTab;
 class EventItemDefault extends Component {
 
   render() {
     console.log(this.props.listNode);
+
     return (
 
       <div className="row d8EventRow">
@@ -25,7 +28,7 @@ class EventItemDefault extends Component {
 
         <div className="col-12 col-sm-3 col-md-5 col-lg-3 col-xl-3 d8EventImageContainer">
 
-            {this.props.listNode.image_url !== "" && <a href={`${this.props.listNode.alias}/?eventDate=${validDate(this.props.listNode.very_start_date, 'YYYY-MM-DD')}`} target="_blank">
+            {this.props.listNode.image_url !== "" && <a href={`${this.props.listNode.alias}/?eventDate=${validDate(this.props.listNode.very_start_date, 'YYYY-MM-DD')}`} target={`${newTab}`}>
               <img src={this.props.listNode.image_url} alt={this.props.listNode.title} className="img-fluid d8EventImage" />
             </a>}
 
@@ -38,7 +41,7 @@ class EventItemDefault extends Component {
         <div className="col-12 col-sm-9 col-md-7 col-lg-9 col-xl-9 d8EventDetailsContainer">
 
             <p className="d8EventTitle">
-              <a href={`${this.props.listNode.alias}/?eventDate=${validDate(this.props.listNode.very_start_date, 'YYYY-MM-DD')}`} target="_blank">{this.props.listNode.title}</a>
+              <a href={`${this.props.listNode.alias}/?eventDate=${validDate(this.props.listNode.very_start_date, 'YYYY-MM-DD')}`} target={`${newTab}`}>{this.props.listNode.title}</a>
             </p>
             <div className="row">
               <div className="col-6 col-sm-6 col-md-6 col-lg-6 col-xl-6 d8StartAndEnd">
@@ -65,6 +68,8 @@ class EventItemDefault extends Component {
 class EventItemCard extends Component {
 
   render() {
+    console.log(this.props)
+
     return (
 
       <div className="col col-12 col-lg-4 eventItemCard">
@@ -84,7 +89,7 @@ class EventItemCard extends Component {
 
         <div className="d8EventDetailsContainer">
             <p className="d8EventTitle">
-              <a href={`${this.props.listNode.alias}/?eventDate=${validDate(this.props.listNode.very_start_date, 'YYYY-MM-DD')}`} target="_blank">{this.props.listNode.title}</a>
+              <a href={`${this.props.listNode.alias}/?eventDate=${validDate(this.props.listNode.very_start_date, 'YYYY-MM-DD')}`} target={`${newTab}`}>{this.props.listNode.title}</a>
             </p>
             <div className="row">
               <div className="d8StartAndEndEventCard">
@@ -115,8 +120,16 @@ class D8Events extends Component {
   state = {
     displayData: []
   };
+  
 
   componentDidMount() {
+    console.log(this.props);
+
+    if(this.props.dataFromPage.newtab == "newTab"){
+      newTab = "_blank";
+    }else{
+      newTab = "_self";
+    }
 
     // const feedURL = 'https://cors-anywhere.herokuapp.com/https://asuevents.asu.edu/feed-json/college-liberal-arts-and-sciences'
     const feedData = this.props.dataFromPage.feed.split(",");
@@ -194,6 +207,13 @@ class D8Events extends Component {
   }
 
   render() {
+    let newTab = "";
+
+    if(this.props.dataFromPage.newTab == "true"){
+      newTab = "_blank";
+    }else{
+      newTab = "_self";
+    }
     // console.log(this.state.displayData);
     var results = this.state.displayData.map(thisNode => ({ nid: thisNode.node.nid, title: thisNode.node.title, image_url: thisNode.node.image_url, start_date: thisNode.node.start_date, campus: thisNode.node.campus, interests: thisNode.node.interests, very_start_date: thisNode.node.very_start_date, very_end_date: thisNode.node.very_end_date, alias: thisNode.node.alias }));
     console.log(results[0]);
