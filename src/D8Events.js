@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import moment from 'moment';
 import './D8Events.css';
 import {validDate, formatTime} from './D8Utils'
 
@@ -150,7 +149,7 @@ class D8Events extends Component {
           for (var i = 0; i < tempDisplayData.length; i++) {
             tempDisplayData[i].flag = false;
             // Flag NOT tags
-            console.log(feedTagsNot);
+            //console.log(feedTagsNot);
             for (var j = 0; j < feedTagsNot.length; j++) {
               //console.log(tempDisplayData[i].node.interests);
               //console.log(feedTagsNot[j]);
