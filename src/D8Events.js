@@ -49,7 +49,7 @@ class EventItemDefault extends Component {
                 <span>{validDate(this.props.listNode.very_start_date, 'dddd')}, </span>
                 <span>{validDate(this.props.listNode.very_start_date, 'MMMM')}&nbsp;</span>
                 <span>{validDate(this.props.listNode.very_start_date, 'D')}</span>
-                <p>{formatTime(this.props.listNode.full_start_date, this.props.listNode.full_end_date)}</p>
+                <p>{this.props.listNode.start_date}</p>
               </div>
               <div className="col-6 col-sm-6 col-md-6 col-lg-6 col-xl-6">
                 <div className="d8Location"><i className="fas fa-map-marker-alt"></i>&nbsp;&nbsp;{this.props.listNode.campus}</div>
@@ -98,7 +98,7 @@ class EventItemCard extends Component {
                   <span>{validDate(this.props.listNode.very_start_date, 'dddd')}, </span>
                   <span>{validDate(this.props.listNode.very_start_date, 'MMMM')}&nbsp;</span>
                   <span>{validDate(this.props.listNode.very_start_date, 'D')}</span>
-                  <div>{formatTime(this.props.listNode.full_start_date, this.props.listNode.full_end_date)}</div>
+                  <div>{this.props.listNode.start_date}</div>
                 </div>
                 <div className="d8LocationThreeCards">
                   <i className="fas fa-map-marker-alt"></i>&nbsp;&nbsp;
@@ -120,7 +120,7 @@ class D8Events extends Component {
   state = {
     displayData: []
   };
-  
+
 
   componentDidMount() {
     console.log(this.props);
