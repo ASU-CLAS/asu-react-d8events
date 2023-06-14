@@ -1,19 +1,14 @@
 import React, { Component } from 'react';
-import moment from 'moment';
+import { format } from 'date-fns'
 
 
 export const validDate = (dateData, dateFormat) => {
-  let returnDate = moment.utc(dateData).format(dateFormat);
-  if(returnDate === "Invalid date") {
-    dateData = dateData.split(':');
-    returnDate = moment.utc(dateData[0]).format(dateFormat);
-    console.log(dateData[1]);
-    console.log(dateFormat);
-    if(dateData[1] === "00Z" && dateFormat === 'h:mm') {
-      returnDate = "All day";
-    }
+  let returnDate = new Date(dateData)
+
+  if(returnDate !== "Invalid Date") {
+    returnDate = format(returnDate, dateFormat);
   }
-  if(returnDate === "Invalid date") {
+  else {
     returnDate = "";
   }
   return returnDate;
@@ -25,7 +20,7 @@ export const formatTime = (startTime, endTime) => {
     return startTime;
   }
   else {
-    return startTime.slice(13) + " - " + endTime.slice(13);
+    return startTime + " - " + endTime;
   }
 }
 

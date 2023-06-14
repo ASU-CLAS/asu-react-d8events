@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import moment from 'moment';
 import './D8Events.css';
 import {validDate, formatTime} from './D8Utils'
 
@@ -9,8 +8,6 @@ let newTab;
 class EventItemDefault extends Component {
 
   render() {
-    console.log(this.props.listNode);
-
     return (
 
       <div className="row d8EventRow">
@@ -28,28 +25,25 @@ class EventItemDefault extends Component {
 
         <div className="col-12 col-sm-3 col-md-5 col-lg-3 col-xl-3 d8EventImageContainer">
 
-            {this.props.listNode.image_url !== "" && <a href={`${this.props.listNode.alias}/?eventDate=${validDate(this.props.listNode.very_start_date, 'YYYY-MM-DD')}`} target={`${newTab}`}>
+            {this.props.listNode.image_url !== "" && <a href={`${this.props.listNode.alias}/?eventDate=${validDate(this.props.listNode.very_start_date, 'yyyy-mm-dd')}`} target={`${newTab}`}>
               <img src={this.props.listNode.image_url} alt={this.props.listNode.title} className="img-fluid d8EventImage" />
             </a>}
 
 
         </div>
-        {/*this.props.listNode.campus
-          <p>{formatTime(validDate(this.props.listNode.very_start_date,'h:mm'), validDate(this.props.listNode.very_end_date,'h:mm'))}</p>
-        */}
 
         <div className="col-12 col-sm-9 col-md-7 col-lg-9 col-xl-9 d8EventDetailsContainer">
 
             <p className="d8EventTitle">
-              <a href={`${this.props.listNode.alias}/?eventDate=${validDate(this.props.listNode.very_start_date, 'YYYY-MM-DD')}`} target={`${newTab}`}>{this.props.listNode.title}</a>
+              <a href={`${this.props.listNode.alias}/?eventDate=${validDate(this.props.listNode.very_start_date, 'yyyy-mm-dd')}`} target={`${newTab}`}>{this.props.listNode.title}</a>
             </p>
             <div className="row">
               <div className="col-6 col-sm-6 col-md-6 col-lg-6 col-xl-6 d8StartAndEnd">
               <i className="far fa-calendar"></i>&nbsp;&nbsp;
-                <span>{validDate(this.props.listNode.very_start_date, 'dddd')}, </span>
-                <span>{validDate(this.props.listNode.very_start_date, 'MMMM')}&nbsp;</span>
-                <span>{validDate(this.props.listNode.very_start_date, 'D')}</span>
-                <p>{this.props.listNode.start_date}</p>
+                <span>{validDate(this.props.listNode.very_start_date, 'MMMM')} </span>
+                <span>{validDate(this.props.listNode.very_start_date, 'do')} </span>
+                <span>{validDate(this.props.listNode.very_start_date, 'yyyy')}</span>
+                <p> { formatTime( validDate(this.props.listNode.very_start_date,'h:mm a'), validDate(this.props.listNode.very_end_date,'h:mm a') )} </p>
               </div>
               <div className="col-6 col-sm-6 col-md-6 col-lg-6 col-xl-6">
                 <div className="d8Location"><i className="fas fa-map-marker-alt"></i>&nbsp;&nbsp;{this.props.listNode.campus}</div>
@@ -68,10 +62,7 @@ class EventItemDefault extends Component {
 class EventItemCard extends Component {
 
   render() {
-    console.log(this.props)
-
     return (
-
       <div className="col col-12 col-lg-4 eventItemCard">
 
       <div className="card card-event">
@@ -123,8 +114,6 @@ class D8Events extends Component {
 
 
   componentDidMount() {
-    console.log(this.props);
-
     if(this.props.dataFromPage.newtab == "newTab"){
       newTab = "_blank";
     }else{
@@ -150,10 +139,8 @@ class D8Events extends Component {
         feedTagsOr.push(feedData[i].substring(1).toLowerCase());
       }
     }
-    console.log(feedData);
 
     axios.get(feedURL).then(response => {
-           console.log(response.data.nodes);
           var tempDisplayData = response.data.nodes;
           var finalDisplayData = [];
           //console.log(tempDisplayData);
@@ -162,7 +149,7 @@ class D8Events extends Component {
           for (var i = 0; i < tempDisplayData.length; i++) {
             tempDisplayData[i].flag = false;
             // Flag NOT tags
-            console.log(feedTagsNot);
+            //console.log(feedTagsNot);
             for (var j = 0; j < feedTagsNot.length; j++) {
               //console.log(tempDisplayData[i].node.interests);
               //console.log(feedTagsNot[j]);
@@ -180,7 +167,6 @@ class D8Events extends Component {
             }
 
             // Flag AND tags
-            console.log(feedTagsAnd);
             for (var k = 0; k < feedTagsAnd.length; k++) {
               if( tempDisplayData[i].node.interests.toLowerCase().includes(feedTagsAnd[k]) == false && tempDisplayData[i].node.event_units.toLowerCase().includes(feedTagsAnd[k]) == false && tempDisplayData[i].node.audiences.toLowerCase().includes(feedTagsAnd[k]) == false ) {
                 tempDisplayData[i].flag = true;
@@ -200,8 +186,6 @@ class D8Events extends Component {
             displayNot: feedTagsNot,
           })
 
-          console.log(this.state);
-
     })
 
   }
@@ -209,9 +193,6 @@ class D8Events extends Component {
   render() {
     // console.log(this.state.displayData);
     var results = this.state.displayData.map(thisNode => ({ nid: thisNode.node.nid, title: thisNode.node.title, image_url: thisNode.node.image_url, start_date: thisNode.node.start_date, campus: thisNode.node.campus, interests: thisNode.node.interests, very_start_date: thisNode.node.very_start_date, very_end_date: thisNode.node.very_end_date, alias: thisNode.node.alias }));
-    console.log(results[0]);
-    console.log(results[1]);
-    console.log(results[2]);
 
     // need 2018-07-07T19%3A30
     // have 2018-07-07
