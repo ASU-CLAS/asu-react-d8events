@@ -1,13 +1,16 @@
-React component for displaying ASU Event items from the asuevents.asu.edu. This React component can be used as a stand alone component and it has also been optimized for working inside of a Drupal environment.
+React component for displaying ASU Events from the asuevents.asu.edu [JSON feed](https://news.asu.edu/feeds-json/college-liberal-arts-and-sciences). This React component can be used as a stand alone component and it has also been optimized for working inside of a Drupal environment.
+
+### Demo: <a href="https://codepen.io/rbruce2/pen/KerjBm" target="blank">ASU News Feed</a>
 
 ## Install (Stand Alone)
-* `git clone https://github.com/ASU-CLAS/asu-react-d8events.git`
+* `git clone https://github.com/ASU-CLAS/asu-react-d8news.git`
 * `yarn` - install all dependencies
+* `yarn dev` - run the development server to test the app (Use https://chrome.google.com/webstore/detail/allow-cors-access-control/lhobafahddgcelffkeicbaginigeejlf?hl=en browser extension to allow CORS)
 * `yarn build` - build project files (Includes React Library- will need to install Bootstrap v4 separately )
 
 
 ## Install (Drupal)
-* `git clone https://github.com/ASU-CLAS/asu-react-d8events.git`
+* `git clone https://github.com/ASU-CLAS/asu-react-d8news.git`
 * `yarn` - install all dependencies
 * `yarn drupal` - build project files (Excludes React Library)
 
@@ -29,11 +32,12 @@ This React component will render inside an element with a class name of `clas-ne
 
 | Parameter     |  Options |
 | ------------- | :------|
-| data-feed      | from asu now json feed (e.g. https://asuevents.asu.edu/feed-json/college_liberal_arts_and_sciences) |
-| data-items      | string of feed items to display (All, Three, ThreeCards ) |
+| data-feed      | from asu now json feed (e.g. https://asunow.asu.edu/feeds-json/college-liberal-arts-and-sciences) |
+| data-items      | string, number of feed items to display (All or Three) |
+| data-view      | string, view style (Cards, Horizontal or Table ) |
 
 Example:
 
 ```html
-<div class="clas-news-react-base" data-feed="https://cors-anywhere.herokuapp.com/https://asuevents.asu.edu/feed-json/college_liberal_arts_and_sciences" data-items="All"></div>
+<div class="clas-news-react-base" data-feed="https://cors-anywhere.herokuapp.com/https://asunow.asu.edu/feeds-json/college-liberal-arts-and-sciences" data-items="All" data-view="Cards"></div>
 ```

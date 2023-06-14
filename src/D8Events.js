@@ -1,58 +1,63 @@
 import React, { Component } from 'react';
-import axios from 'axios';
+import Calendar from "./Calendar/Calendar";
 import './D8Events.css';
-import {validDate, formatTime} from './D8Utils'
+import {validDate, formatTime} from './D8Utils';
+import ReactHtmlParser from '../node_modules/react-html-parser';
+
+// class EventTimeSection extends Component {
+//   return(
+//     <span>{validDate(this.props.listNode.very_start_date, 'EEE')}, </span>
+//     <span>{validDate(this.props.listNode.very_start_date, 'MMMM')} </span>
+//     <span>{validDate(this.props.listNode.very_start_date, 'do')}</span>
+//     <div>{formatTime(this.props.listNode.start_date, this.props.listNode.end_date)}</div>
+//   );
+// }
+
+function EventTimeSection(props) {
+  return (
+    <><span>{validDate(this.props.listNode.very_start_date, 'EEE')}, </span>
+    <span>{validDate(this.props.listNode.very_start_date, 'MMMM')} </span>
+    <span>{validDate(this.props.listNode.very_start_date, 'do')}</span>
+    <div>{formatTime(this.props.listNode.start_date, this.props.listNode.end_date)}</div></>
+  );
+}
 
 
-let newTab;
 class EventItemDefault extends Component {
 
   render() {
+    //console.log(this.props.listNode);
+    let time_section = (<><span>{validDate(this.props.listNode.very_start_date, 'EEE')}, </span>
+    <span>{validDate(this.props.listNode.very_start_date, 'MMMM')} </span>
+    <span>{validDate(this.props.listNode.very_start_date, 'do')}</span>
+    <div>{formatTime(this.props.listNode.start_date, this.props.listNode.end_date)}</div></>);
+
+    if (this.props.listNode.time_description != "") {
+      let newTime = this.props.listNode.time_description.split('<br />');
+      time_section = (<><div>{ ReactHtmlParser (newTime[0]) }</div></>);
+    }
+    //console.log(this.props.listNode.time_description);
+
     return (
-
-      <div className="row d8EventRow">
-
-        {/*<div className="d8EventDateContainer">
-
-          <span className="d8EventDateNumber">{validDate(this.props.listNode.very_start_date, 'D')}</span>
-
-          <div className="d8DayOfWeekMonthContainer">
-            <span className="d8EventDayOfWeek">{validDate(this.props.listNode.very_start_date, 'dddd')}</span>
-            <span className="d8EventMonth">{validDate(this.props.listNode.very_start_date, 'MMMM')}</span>
+      <div className="card card-event card-horizontal">
+      <img className="card-img-top" src={this.props.listNode.image_url} alt={this.props.listNode.title} />
+        <div className="card-content-wrapper">
+          <div className="card-header">
+            <h3 className="card-title"><a href={`${this.props.listNode.alias}/?eventDate=${validDate(this.props.listNode.very_start_date, 'yyyy-mm-dd')}`} target="_blank">{this.props.listNode.title}</a></h3>
           </div>
-
-    </div>*/}
-
-        <div className="col-12 col-sm-3 col-md-5 col-lg-3 col-xl-3 d8EventImageContainer">
-
-            {this.props.listNode.image_url !== "" && <a href={`${this.props.listNode.alias}/?eventDate=${validDate(this.props.listNode.very_start_date, 'yyyy-mm-dd')}`} target={`${newTab}`}>
-              <img src={this.props.listNode.image_url} alt={this.props.listNode.title} className="img-fluid d8EventImage" />
-            </a>}
-
-
-        </div>
-
-        <div className="col-12 col-sm-9 col-md-7 col-lg-9 col-xl-9 d8EventDetailsContainer">
-
-            <p className="d8EventTitle">
-              <a href={`${this.props.listNode.alias}/?eventDate=${validDate(this.props.listNode.very_start_date, 'yyyy-mm-dd')}`} target={`${newTab}`}>{this.props.listNode.title}</a>
-            </p>
-            <div className="row">
-              <div className="col-6 col-sm-6 col-md-6 col-lg-6 col-xl-6 d8StartAndEnd">
-              <i className="far fa-calendar"></i>&nbsp;&nbsp;
-                <span>{validDate(this.props.listNode.very_start_date, 'MMMM')} </span>
-                <span>{validDate(this.props.listNode.very_start_date, 'do')} </span>
-                <span>{validDate(this.props.listNode.very_start_date, 'yyyy')}</span>
-                <p> { formatTime( validDate(this.props.listNode.very_start_date,'h:mm a'), validDate(this.props.listNode.very_end_date,'h:mm a') )} </p>
-              </div>
-              <div className="col-6 col-sm-6 col-md-6 col-lg-6 col-xl-6">
-                <div className="d8Location"><i className="fas fa-map-marker-alt"></i>&nbsp;&nbsp;{this.props.listNode.campus}</div>
+          <div className="card-event-details">
+            <div className="card-event-icons">
+              <div><i className="far fa-calendar"></i></div>
+              <div>
+                {this.props.listNode.start_date}
               </div>
             </div>
-
-
+            <div className="card-event-icons">
+              <div><i className="fas fa-map-marker-alt"></i></div>
+              <div>{this.props.listNode.locations}<br/>{this.props.listNode.campus}</div>
+            </div>
+          </div>
         </div>
-
       </div>
 
     );
@@ -61,47 +66,44 @@ class EventItemDefault extends Component {
 
 class EventItemCard extends Component {
 
+
+
   render() {
+
+    let time_section = (<><span>{validDate(this.props.listNode.very_start_date, 'EEE')}, </span>
+    <span>{validDate(this.props.listNode.very_start_date, 'MMMM')} </span>
+    <span>{validDate(this.props.listNode.very_start_date, 'do')}</span>
+    <div>{formatTime(this.props.listNode.start_date, this.props.listNode.end_date)}</div></>);
+
+    if (this.props.listNode.time_description != "") {
+      let newTime = this.props.listNode.time_description.split('<br />');
+      time_section = (<><div>{ ReactHtmlParser (newTime[0]) }</div></>);
+    }
+
     return (
-      <div className="col col-12 col-lg-4 eventItemCard">
 
+<div className="col col-12 col-lg-4">
       <div className="card card-event">
-        <div className="d8EventImageTop-wrapper">
-          {this.props.listNode.image_url !== "" && <img src={this.props.listNode.image_url} alt={this.props.listNode.title} className="card-img-top img-fluid d8EventImage" />}
+        <img className="card-img-top" src={this.props.listNode.image_url} alt={this.props.listNode.title} />
+        <div className="card-header">
+          <h3 className="card-title"><a href={`${this.props.listNode.alias}/?eventDate=${validDate(this.props.listNode.very_start_date, 'yyyy-mm-dd')}`} target="_blank">{this.props.listNode.title}</a></h3>
         </div>
-
-        {/*<div className="d8EventDateContainer">
-          <span className="d8EventDateNumber">{validDate(this.props.listNode.very_start_date, 'D')}</span>
-          <div className="d8DayOfWeekMonthContainer">
-            <span className="d8EventDayOfWeek">{validDate(this.props.listNode.very_start_date, 'dddd')}</span>
-            <span className="d8EventMonth">{validDate(this.props.listNode.very_start_date, 'MMMM')}</span>
-          </div>
-    </div>*/}
-
-        <div className="d8EventDetailsContainer">
-            <p className="d8EventTitle">
-              <a href={`${this.props.listNode.alias}/?eventDate=${validDate(this.props.listNode.very_start_date, 'YYYY-MM-DD')}`} target={`${newTab}`}>{this.props.listNode.title}</a>
-            </p>
-            <div className="row">
-              <div className="d8StartAndEndEventCard">
-                <div>
-                  <i className="far fa-calendar"></i>&nbsp;&nbsp;
-                  <span>{validDate(this.props.listNode.very_start_date, 'dddd')}, </span>
-                  <span>{validDate(this.props.listNode.very_start_date, 'MMMM')}&nbsp;</span>
-                  <span>{validDate(this.props.listNode.very_start_date, 'D')}</span>
-                  <div>{this.props.listNode.start_date}</div>
-                </div>
-                <div className="d8LocationThreeCards">
-                  <i className="fas fa-map-marker-alt"></i>&nbsp;&nbsp;
-                  <span>{this.props.listNode.campus}</span>
-                </div>
-              </div>
+        <div className="card-event-details">
+          <div className="card-event-icons">
+            <div><i className="far fa-calendar"></i></div>
+            <div>
+              {this.props.listNode.start_date}
             </div>
+          </div>
         </div>
-
+        <div className="card-event-details">
+          <div className="card-event-icons">
+            <div><i className="fas fa-map-marker-alt"></i></div>
+            <div>{this.props.listNode.locations}<br/>{this.props.listNode.campus}</div>
+          </div>
         </div>
       </div>
-
+</div>
     );
   }
 }
@@ -112,13 +114,14 @@ class D8Events extends Component {
     displayData: []
   };
 
+  isMobile() {
+    if(window.innerWidth <= 414 && window.innerHeight <= 825){
+      return true;
+    }
+    return false
+  }
 
   componentDidMount() {
-    if(this.props.dataFromPage.newtab == "newTab"){
-      newTab = "_blank";
-    }else{
-      newTab = "_self";
-    }
 
     // const feedURL = 'https://cors-anywhere.herokuapp.com/https://asuevents.asu.edu/feed-json/college-liberal-arts-and-sciences'
     const feedData = this.props.dataFromPage.feed.split(",");
@@ -140,7 +143,63 @@ class D8Events extends Component {
       }
     }
 
+
+
+    //console.log(feedData);
+
+    fetch(feedURL).then(res=>res.json()).then(response=>{
+      //console.log(response.nodes);
+      var tempDisplayData = response.nodes;
+      var finalDisplayData = [];
+      //console.log(tempDisplayData);
+
+      // Loop through feed nodes and flag them if certain tags are found
+      for (var i = 0; i < tempDisplayData.length; i++) {
+        tempDisplayData[i].flag = false;
+        // Flag NOT tags
+        //console.log(feedTagsNot);
+        for (var j = 0; j < feedTagsNot.length; j++) {
+          //console.log(tempDisplayData[i].node.interests);
+          //console.log(feedTagsNot[j]);
+          if( tempDisplayData[i].node.interests.toLowerCase().includes(feedTagsNot[j]) ) {
+            tempDisplayData[i].flag = true;
+            //console.log("FLAGGING NODE");
+            //console.log(tempDisplayData[i]);
+          }
+          if( tempDisplayData[i].node.event_units.toLowerCase().includes(feedTagsNot[j]) ) {
+            tempDisplayData[i].flag = true;
+          }
+          if( tempDisplayData[i].node.audiences.toLowerCase().includes(feedTagsNot[j]) ) {
+            tempDisplayData[i].flag = true;
+          }
+        }
+
+        // Flag AND tags
+        //console.log(feedTagsAnd);
+        for (var k = 0; k < feedTagsAnd.length; k++) {
+          if( tempDisplayData[i].node.interests.toLowerCase().includes(feedTagsAnd[k]) == false && tempDisplayData[i].node.event_units.toLowerCase().includes(feedTagsAnd[k]) == false && tempDisplayData[i].node.audiences.toLowerCase().includes(feedTagsAnd[k]) == false ) {
+            tempDisplayData[i].flag = true;
+          }
+        }
+
+        if(tempDisplayData[i].flag == false) {
+          finalDisplayData.push(tempDisplayData[i]);
+        }
+
+      }
+
+      this.setState({
+        displayData: finalDisplayData,
+        displayStyle: feedStyle,
+        displayNot: feedTagsNot,
+      })
+
+      //console.log(this.state);
+    });
+
+    /*
     axios.get(feedURL).then(response => {
+          console.log(response.data.nodes);
           var tempDisplayData = response.data.nodes;
           var finalDisplayData = [];
           //console.log(tempDisplayData);
@@ -149,7 +208,7 @@ class D8Events extends Component {
           for (var i = 0; i < tempDisplayData.length; i++) {
             tempDisplayData[i].flag = false;
             // Flag NOT tags
-            //console.log(feedTagsNot);
+            console.log(feedTagsNot);
             for (var j = 0; j < feedTagsNot.length; j++) {
               //console.log(tempDisplayData[i].node.interests);
               //console.log(feedTagsNot[j]);
@@ -167,6 +226,7 @@ class D8Events extends Component {
             }
 
             // Flag AND tags
+            console.log(feedTagsAnd);
             for (var k = 0; k < feedTagsAnd.length; k++) {
               if( tempDisplayData[i].node.interests.toLowerCase().includes(feedTagsAnd[k]) == false && tempDisplayData[i].node.event_units.toLowerCase().includes(feedTagsAnd[k]) == false && tempDisplayData[i].node.audiences.toLowerCase().includes(feedTagsAnd[k]) == false ) {
                 tempDisplayData[i].flag = true;
@@ -179,20 +239,29 @@ class D8Events extends Component {
 
           }
 
-
           this.setState({
             displayData: finalDisplayData,
             displayStyle: feedStyle,
             displayNot: feedTagsNot,
           })
 
+          console.log(this.state);
+
     })
+    */
 
   }
 
   render() {
     // console.log(this.state.displayData);
-    var results = this.state.displayData.map(thisNode => ({ nid: thisNode.node.nid, title: thisNode.node.title, image_url: thisNode.node.image_url, start_date: thisNode.node.start_date, campus: thisNode.node.campus, interests: thisNode.node.interests, very_start_date: thisNode.node.very_start_date, very_end_date: thisNode.node.very_end_date, alias: thisNode.node.alias }));
+
+    var results = this.state.displayData.map(thisNode => ({ nid: thisNode.node.nid, title: thisNode.node.title, image_url: thisNode.node.image_url, start_date: thisNode.node.start_date, end_date: thisNode.node.end_date, campus: thisNode.node.campus, interests: thisNode.node.interests, very_start_date: thisNode.node.very_start_date, very_end_date: thisNode.node.very_end_date, alias: thisNode.node.alias, locations: thisNode.node.locations, time_description: thisNode.node.time_description }));
+    console.log(results[0]);
+    console.log(results[1]);
+    console.log(results[2]);
+
+
+    //console.log(results, "beep boop beep");
 
     // need 2018-07-07T19%3A30
     // have 2018-07-07
@@ -202,7 +271,7 @@ class D8Events extends Component {
 
       case "Three":
         return (
-          <div className="container">
+          <div className="container D8News">
             {results.slice(0,3).map(( listNode, index ) => {
               return(
                 <React.Fragment key={index}>
@@ -214,9 +283,17 @@ class D8Events extends Component {
         )
       break;
 
+      case "Calendar":
+        return (
+
+             <main>
+              <Calendar isMobile={this.isMobile.bind(this)} results={results}/>
+            </main>
+      );
+
       case "ThreeCards":
         return (
-          <div className="container">
+          <div className="container D8News">
           <div className="row">
             {results.slice(0,3).map(( listNode, index ) => {
               return(

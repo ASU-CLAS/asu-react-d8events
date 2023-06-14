@@ -1,6 +1,4 @@
-import React, { Component } from 'react';
 import { format } from 'date-fns'
-
 
 export const validDate = (dateData, dateFormat) => {
   let returnDate = new Date(dateData)
@@ -20,7 +18,6 @@ export const formatTime = (startTime, endTime) => {
     return startTime;
   }
   else {
-    return startTime + " - " + endTime;
+    return startTime.slice(13) + " - " + endTime.slice(13);
   }
 }
-
