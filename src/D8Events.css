@@ -1,6 +1,6 @@
 .card-event.card-horizontal img.card-img-top {
   max-width: 40%;
-  width: 40%;
+  width: -webkit-fill-available;
   height: auto !important;
   max-height: 400px;
 }
