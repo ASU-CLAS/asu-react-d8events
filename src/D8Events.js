@@ -43,7 +43,7 @@ class EventItemDefault extends Component {
       <img className="card-img-top" src={this.props.listNode.image_url} alt={this.props.listNode.title} />
         <div className="card-content-wrapper">
           <div className="card-header">
-            <h3 className="card-title"><a href={`${this.props.listNode.alias}/?eventDate=${validDate(this.props.listNode.very_start_date, 'yyyy-mm-dd')}`} target="_blank">{this.props.listNode.title}</a></h3>
+            <h3 className="card-title"><a href={`${this.props.listNode.alias_indexed}`} target="_blank">{this.props.listNode.title}</a></h3>
           </div>
           <div className="card-event-details">
             <div className="card-event-icons">
@@ -86,7 +86,7 @@ class EventItemCard extends Component {
       <div className="card card-event">
         <img className="card-img-top" src={this.props.listNode.image_url} alt={this.props.listNode.title} />
         <div className="card-header">
-          <h3 className="card-title"><a href={`${this.props.listNode.alias}/?eventDate=${validDate(this.props.listNode.very_start_date, 'yyyy-mm-dd')}`} target="_blank">{this.props.listNode.title}</a></h3>
+          <h3 className="card-title"><a href={`${this.props.listNode.alias_indexed}}`} target="_blank">{this.props.listNode.title}</a></h3>
         </div>
         <div className="card-event-details">
           <div className="card-event-icons">
@@ -253,12 +253,11 @@ class D8Events extends Component {
   }
 
   render() {
-    // console.log(this.state.displayData);
+    var results = this.state.displayData.map(thisNode => ({ nid: thisNode.node.nid, title: thisNode.node.title, image_url: thisNode.node.image_url, start_date: thisNode.node.start_date, end_date: thisNode.node.end_date, campus: thisNode.node.campus, interests: thisNode.node.interests, very_start_date: thisNode.node.very_start_date, very_end_date: thisNode.node.very_end_date, alias: thisNode.node.alias, alias_indexed: thisNode.node['alias-indexed'], locations: thisNode.node.locations, time_description: thisNode.node.time_description }));
 
-    var results = this.state.displayData.map(thisNode => ({ nid: thisNode.node.nid, title: thisNode.node.title, image_url: thisNode.node.image_url, start_date: thisNode.node.start_date, end_date: thisNode.node.end_date, campus: thisNode.node.campus, interests: thisNode.node.interests, very_start_date: thisNode.node.very_start_date, very_end_date: thisNode.node.very_end_date, alias: thisNode.node.alias, locations: thisNode.node.locations, time_description: thisNode.node.time_description }));
-    console.log(results[0]);
-    console.log(results[1]);
-    console.log(results[2]);
+    //console.log(results[0]);
+    //console.log(results[1]);
+    //console.log(results[2]);
 
 
     //console.log(results, "beep boop beep");
