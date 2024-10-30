@@ -3,6 +3,7 @@ import Calendar from "./Calendar/Calendar";
 import './D8Events.css';
 import {validDate, formatTime} from './D8Utils';
 import ReactHtmlParser from '../node_modules/react-html-parser';
+import { intlFormat } from 'date-fns';
 
 // class EventTimeSection extends Component {
 //   return(
@@ -38,23 +39,41 @@ class EventItemDefault extends Component {
     }
     //console.log(this.props.listNode.time_description);
 
+    const timestamp = new Date(this.props.listNode.very_start_date);
+    // let eventDate = timestamp.getDay() + ', ' + timestamp.getMonth() + ' ' + timestamp.getDate();
+    const eventDay = new Intl.DateTimeFormat('en-US', {
+      weekday: 'long'
+    }).format(timestamp);
+    const eventMonth = new Intl.DateTimeFormat('en-US', {
+      month: 'long'
+    }).format(timestamp);
+    const eventTime = this.props.listNode.start_date.split(' - ')[1];
+    console.log(eventTime);
+
     return (
-      <div className="card card-event card-horizontal">
-      <img className="card-img-top" src={this.props.listNode.image_url} alt={this.props.listNode.title} />
+      <div className="card cards-components card-event card-horizontal">
+        <a href={this.props.listNode.alias_indexed} target='_blank'>
+          <img className="card-img-top uds-img borderless" src={this.props.listNode.image_url} alt={this.props.listNode.title} loading='lazy' decoding='async'/>
+          <span className="visually-hidden">{this.props.listNode.title}</span>
+        </a>
         <div className="card-content-wrapper">
           <div className="card-header">
-            <h3 className="card-title"><a href={`${this.props.listNode.alias_indexed}`} target="_blank">{this.props.listNode.title}</a></h3>
+            <h3 className="card-title">
+              <a href={`${this.props.listNode.alias_indexed}`} target="_blank">{this.props.listNode.title}</a>
+              </h3>
           </div>
           <div className="card-event-details">
             <div className="card-event-icons">
               <div><i className="far fa-calendar"></i></div>
               <div>
-                {this.props.listNode.start_date}
+                {eventDay + ', ' + eventMonth + ' ' + timestamp.getDate()}
+                <br/>
+                {eventTime}
               </div>
             </div>
             <div className="card-event-icons">
               <div><i className="fas fa-map-marker-alt"></i></div>
-              <div>{this.props.listNode.locations}<br/>{this.props.listNode.campus}</div>
+              <div>{this.props.listNode.locations ? <span>{this.props.listNode.locations} <br /></span> : <></>}{this.props.listNode.campus}</div>
             </div>
           </div>
         </div>
