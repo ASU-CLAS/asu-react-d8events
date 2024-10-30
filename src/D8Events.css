@@ -1,66 +1,66 @@
-.card {
+.clas-events-react-base .card-horizontal {
   height: 235px;
 }
 @media (max-width: 767.98px) {
-  .card .card-img-top {
+  .clas-events-react-base .card .card-img-top {
     height: 160px !important;
   }
-  .card-horizontal>a {
+  .clas-events-react-base .card-horizontal>a {
     width: 100% !important;
   }
 }
 @media (max-width: 992px) {
-  .card {
+  .clas-events-react-base .card {
     height: 100%
   }
-  .card .card-img-top {
+  .clas-events-react-base .card .card-img-top {
     height: auto;
     width: auto;
   }
 
-  .card .card-event-details {
+  .clas-events-react-base .card .card-event-details {
     flex-direction: column;
   }
-  .card .card-event-details .card-event-icons:nth-child(1) {
+  .clas-events-react-base .card .card-event-details .card-event-icons:nth-child(1) {
     margin-bottom: 24px;
   }
-  .card .card-event-details .card-event-icons {
+  .clas-events-react-base .card .card-event-details .card-event-icons {
     width: 100%;
   }
 }
 @media (min-width: 992px) {
-  .card-event.card-horizontal img.card-img-top {
+  .clas-events-react-base .card-event.card-horizontal img.card-img-top {
     max-height: 250px;
   }
 }
-.card-horizontal>a{
+.clas-events-react-base .card-horizontal>a{
   width: 40%;
   min-width: 40%;
   overflow: hidden;
 }
-.card .card-img-top {
+.clas-events-react-base .card .card-img-top {
   width: 100%;
   height: 12.5rem;
   border-radius: 0px !important;
   object-fit: cover;
   min-width: 100%;
 }
-.card-event.card-horizontal img.card-img-top {
+.clas-events-react-base .card-event.card-horizontal img.card-img-top {
   height: auto;
   aspect-ratio: 2/3;
   max-height: 400px;
 }
 
-.card-event-details {
+.clas-events-react-base .card-event-details {
   display: flex;
   font-size: 14px;
 }
 
-.card-event-details>* {
+.clas-events-react-base .card-event-details>* {
     flex: 50%;
 }
 
-.card-event.card-horizontal .card-content-wrapper {
+.clas-events-react-base .card-event.card-horizontal .card-content-wrapper {
   padding-bottom: 0 !important;
 }
 .clas-events-react-base .card-horizontal {
