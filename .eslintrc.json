@@ -1,7 +1,5 @@
 {
-  "extends": [
-
-  ],
+  "extends": [  ],
   "root": true,
   "env": {
     "browser": true,
@@ -12,6 +10,14 @@
 
   },
   "rules": {
-
+  },
+  "func-style": {
+    "allowArrowFunctions": true
+  },
+  "parserOptions": {
+    "sourceType": "module",
+    "ecmaFeatures": {
+      "jsx": true
+    }
   }
 }
