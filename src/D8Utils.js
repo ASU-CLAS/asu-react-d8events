@@ -1,4 +1,4 @@
-import { format } from 'date-fns'
+import { format } from 'date-fns';
 
 export const validDate = (dateData, dateFormat) => {
   let returnDate = new Date(dateData)
