@@ -1,10 +1,11 @@
-import ReactDOM from "react-dom";
+import { createRoot } from "react-dom/client";
 import "./index.css";
 import "@asu/unity-bootstrap-theme/dist/css/unity-bootstrap-theme.css";
-import D8Events from "./D8Events";
+import Events from "./Events";
 
-let appRoots = document.getElementsByClassName("clas-events-react-base");
+const domNodes = document.getElementsByClassName("clas-events-react-base");
 
-for (let element of appRoots) {
-  ReactDOM.render(<D8Events dataFromPage={element.dataset} />, element);
+for (let node of domNodes) {
+  const root = createRoot(node);
+  root.render(<Events dataFromPage={node.dataset} />);
 }
