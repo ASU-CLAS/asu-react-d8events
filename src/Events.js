@@ -7,12 +7,12 @@ const Events = ({ dataFromPage }) => {
 
   return (
     <>
-      {view === "Grid" ? (
+      {view === "Grid" || items === "ThreeCards" ? (
         <CardsGridEvents
           dataSource={{
             url: feed,
           }}
-          maxItems={items === "Three" && 3}
+          maxItems={items.startsWith("Three") && 3}
         />
       ) : (
         <CardsListEvents
